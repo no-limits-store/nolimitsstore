@@ -95,7 +95,6 @@ header{position:sticky;top:0;z-index:50;background:rgba(10,13,18,.88);backdrop-f
 .news:hover{border-color:var(--yellow);transform:translateY(-4px)}
 .news .top{height:130px;padding:16px;display:flex;align-items:flex-end;justify-content:space-between;font-weight:900;font-size:1.5rem;letter-spacing:.04em}
 .news .top small{font-size:.75rem;background:rgba(0,0,0,.45);padding:5px 10px;border-radius:999px;font-weight:700}
-  .news.has-photo .top{height:190px;color:#fff;background-size:cover;background-position:center}
 .b-jordan .top{background:linear-gradient(135deg,#b3122a,#3a0a14)}
 .b-nike .top{background:linear-gradient(135deg,#f0f0f0,#8d99a6);color:#111}
 .b-reebok .top{background:linear-gradient(135deg,#1c3f94,#0b1a40)}
@@ -363,8 +362,8 @@ function renderNews(filter="Todas"){
   const list = noticias.filter(n => filter==="Todas" || n.marca===filter)
                        .sort((a,b)=>a.fecha<b.fecha?1:-1);
   $("#newsGrid").innerHTML = list.map(n => `
-    <article class="news ${cls(n.marca)} ${n.foto?"has-photo":""}">
-  <div class="top"${n.foto?` style="background-image:linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,.05)),url('${esc(n.foto)}')"`:""}><span>${esc(n.marca.toUpperCase())}</span><small>${fmt(n.fecha)}</small></div>
+    <article class="news ${cls(n.marca)}">
+  <div class="top"><span>${esc(n.marca.toUpperCase())}</span><small>${fmt(n.fecha)}</small></div>
       <div class="body">
         <h3>${esc(n.titulo)}</h3>
         <p>${esc(n.texto)}</p>
