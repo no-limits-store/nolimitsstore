@@ -95,6 +95,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(10,13,18,.88);backdrop-f
 .news:hover{border-color:var(--yellow);transform:translateY(-4px)}
 .news .top{height:130px;padding:16px;display:flex;align-items:flex-end;justify-content:space-between;font-weight:900;font-size:1.5rem;letter-spacing:.04em}
 .news .top small{font-size:.75rem;background:rgba(0,0,0,.45);padding:5px 10px;border-radius:999px;font-weight:700}
+  .news.has-photo .top{height:190px;color:#fff;background-size:cover;background-position:center}
 .b-jordan .top{background:linear-gradient(135deg,#b3122a,#3a0a14)}
 .b-nike .top{background:linear-gradient(135deg,#f0f0f0,#8d99a6);color:#111}
 .b-reebok .top{background:linear-gradient(135deg,#1c3f94,#0b1a40)}
@@ -297,7 +298,7 @@ const NOTICIAS = [
   {marca:"Jordan", titulo:"Air Jordan 5 “Halloween”", fecha:"2026-10-17", texto:"Regresa una de las siluetas más esperadas de la temporada, con temática de otoño.", url:"https://sneakerbardetroit.com/?p=806882"},
   {marca:"Jordan", titulo:"Air Jordan 12 “Fireside”", fecha:"2026-10-24", texto:"El Jordan 12 se viste con una paleta pensada para el frío, parte del calendario de octubre.", url:"https://sneakerbardetroit.com/?p=806882"},
   {marca:"Jordan", titulo:"Air Jordan 41 “University Red”", fecha:"2026-10-25", texto:"El modelo más reciente de la línea principal llega en rojo universitario.", url:"https://sneakerbardetroit.com/?p=806882"},
-  {marca:"Jordan", titulo:"Air Jordan 14 “Forest Green”", fecha:"2026-10-31", texto:"Cierra el mes con un colorway verde profundo del Jordan 14.", url:"https://sneakerbardetroit.com/?p=806882"},
+  {marca:"Jordan", titulo:"Air Jordan 14 “Forest Green”", fecha:"2026-10-31", texto:"Cierra el mes con un colorway verde profundo del Jordan 14.", url:"https://sneakerbardetroit.com/?p=806882"},foto:"fotos/jordan_14_forest_green.jfif"},
   {marca:"Jordan", titulo:"Air Jordan “Black Pack” (14 Low y 16)", fecha:"2026-10-03", texto:"Arranca el Black Pack con el Air Jordan 14 Low y el Air Jordan 16 en negro.", url:"https://sneakerbardetroit.com/?p=806882"},
   {marca:"Nike", titulo:"Nike Caitlin 1 “Racer Blue”", fecha:"2026-10-01", texto:"La primera zapatilla firmada de Caitlin Clark debuta en octubre en el colorway Racer Blue.", url:"https://www.soleretriever.com/news?page=6"},
   {marca:"Nike", titulo:"Nike Air Max 95 “Stealth/Racer Blue”", fecha:"2026-10-04", texto:"Un Air Max 95 en capas, pensado para los días más fríos del año.", url:"https://sneakerbardetroit.com/home-test"},
@@ -362,8 +363,8 @@ function renderNews(filter="Todas"){
   const list = noticias.filter(n => filter==="Todas" || n.marca===filter)
                        .sort((a,b)=>a.fecha<b.fecha?1:-1);
   $("#newsGrid").innerHTML = list.map(n => `
-    <article class="news ${cls(n.marca)}">
-      <div class="top"><span>${esc(n.marca.toUpperCase())}</span><small>${fmt(n.fecha)}</small></div>
+    <article class="news ${cls(n.marca)} ${n.foto?"has-photo":""}">
+  <div class="top"${n.foto?` style="background-image:linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,.05)),url('${esc(n.foto)}')"`:""}><span>${esc(n.marca.toUpperCase())}</span><small>${fmt(n.fecha)}</small></div>
       <div class="body">
         <h3>${esc(n.titulo)}</h3>
         <p>${esc(n.texto)}</p>
